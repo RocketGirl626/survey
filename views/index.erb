@@ -1,1 +1,18 @@
-<h1> Welcome to the survey application </h1> 
+<h1> Welcome to the survey application </h1>
+
+<h3> Here are the current surveys: </h3>
+<% if @surveys.any?() %>
+<% @surveys.each() do |survey| %>
+  <ul>
+      <li><a href='/survey/<%=survey.id()%>'> <%=survey.name()%></a></li>
+  </ul>
+    <%end%>
+<%else %>
+  <p> You have no surveys!</p>
+<%end%>
+
+<form action='/survey_save/' method='post'>
+  <label for='survey_name'> Add survey: </label>
+  <input id='survey_name' name='survey_name' type='text'>
+  <button type='submit' class='btn btn-success'> Save Survey </button>
+</form>
