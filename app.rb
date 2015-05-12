@@ -31,3 +31,40 @@ post('/survey/:id') do
   @questions = @survey.questions()
   erb(:survey_info)
 end
+
+get('/question/:id') do
+  @question = Question.find(params.fetch('id'))
+  erb(:question_info)
+end
+
+patch('/question/:id') do
+  @id = params.fetch('id')
+  @question = Question.find(params.fetch('id'))
+  survey_id = @question.survey_id()
+  @question.update({:inquiry => params.fetch('edit_question'), :survey_id => survey_id})
+  erb(:question_info)
+end
+
+delete('/question/:id') do
+  @question = Question.find(params.fetch('id'))
+  survey_id = @question.survey_id()
+  @question.destroy()
+  @survey = Survey.find(survey_id)
+  @questions = @survey.questions()
+  erb(:survey_info)
+end
+
+patch('/survey/:id') do
+  @id = params.fetch('id')
+  @survey = Survey.find(@id)
+  @survey.update(:name => params.fetch('edit_survey'))
+  @questions = @survey.questions()
+  erb(:survey_info)
+end
+
+delete('/survey/:id') do
+  @survey = Survey.find(params.fetch('id'))
+  @survey.destroy()
+  @surveys = Survey.all()
+  erb(:index)
+end

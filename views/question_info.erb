@@ -1,0 +1,15 @@
+<h1>Question Info for:</h1>
+<h3><%=@question.inquiry()%></h3>
+<form action='/question/<%=@question.id%>' method='post'>
+  <input name="_method" type="hidden" value="patch">
+  <label for='edit_question'> Edit question: </label>
+  <input id='edit_question' name='edit_question' type='text'</input>
+  <button type='submit' class='btn btn-success'>Update Question </button>
+</form>
+
+<form action='/question/<%=@question.id%>' method='post'>
+  <input name='_method' type='hidden' value='delete'>
+  <button type='submit' class="btn btn-danger">Delete Question</button>
+</form>
+
+<a href='/survey/<%=@question.survey_id()%>'>Go back</a>
